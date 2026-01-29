@@ -11,7 +11,7 @@ namespace WebApplication.Controllers
     [Route("api/[controller]")]
     public class CustomerController : ControllerBase
     {
-        // Injecting the ApplicationDbContext to interact with the database
+       
 
         private readonly ApplicationDbContext _context;
         public CustomerController(ApplicationDbContext context)
