@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using WebApplication.Models;
+using Microsoft.EntityFrameworkCore;
+using WebApplication.Data;
 using WebApplication.DTOs;
+using WebApplication.Models;
 
 
 namespace WebApplication.Controllers
@@ -8,27 +10,22 @@ namespace WebApplication.Controllers
 
     public class ProductController : ControllerBase
     {
+        private readonly ApplicationDbContext _context;
+
+        public ProductController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         [Route("api/[controller]")]
         [HttpGet]
-        public IActionResult GetProduct()
+        public async Task<IActionResult> GetProduct()
         {
-          
-            var product = new Product
-            {
-                Id = 1,
-                Name = "Coffee",
-                Price = 5.99m,
-                InternalSecretCode = "X-123"
-            };
 
-   
-            var productDto = new ProductDto
-            {
-                Name = product.Name,
-                Price = product.Price
-            };
+            var products =  await _context.Products.ToListAsync();
 
-            return Ok(productDto);
+
+            return Ok(products);
         }
     }
 }
