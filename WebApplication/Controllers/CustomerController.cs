@@ -12,7 +12,6 @@ namespace WebApplication.Controllers
     public class CustomerController : ControllerBase
     {
        
-
         private readonly ApplicationDbContext _context;
         public CustomerController(ApplicationDbContext context)
         {
